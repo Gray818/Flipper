@@ -1,1 +1,38 @@
-ScoobyDo:d=16,o=5,b=160:8e6,8e6,8d6,8d6,2c6,8d6,4e6,2a,8a,4b,4g,4e6,8d6,4c6,8d6,2e6,4p,8e6,8e6,8d6,8d6,2c6,8d6,4f6,2a,8a,4b,4g,4e6,8d6,2c6
+#include <iostream>
+#include <math.h>
+
+#define PI 3.14159265
+
+using namespace std;
+
+int main()
+{
+double lat1, lon1, lat2, lon2;
+double x, y;
+double bearing;
+
+// Get the current location of the flipper zero
+// lat1 and lon1 are the current latitude and longitude values
+
+// Get the location of the nearest electronic device
+// lat2 and lon2 are the latitude and longitude values of the device
+
+// Calculate the bearing using the Haversine formula
+double dLat = (lat2 - lat1) * PI / 180;
+double dLon = (lon2 - lon1) * PI / 180;
+lat1 = lat1 * PI / 180;
+lat2 = lat2 * PI / 180;
+
+double a = pow(sin(dLat / 2), 2) + pow(sin(dLon / 2), 2) * cos(lat1) * cos(lat2);
+double c = 2 * atan2(sqrt(a), sqrt(1 - a));
+double d = 6371 * c;
+
+x = cos(lat2) * sin(dLon);
+y = cos(lat1) * sin(lat2) - sin(lat1) * cos(lat2) * cos(dLon);
+
+bearing = atan2(x, y) * 180 / PI;
+
+cout << "Bearing: " << bearing << endl;
+
+return 0;
+}
